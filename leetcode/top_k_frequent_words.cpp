@@ -26,3 +26,35 @@ public:
         return ans;
     }
 };
+
+//============================ METHOD-2==================================
+class compare{
+public:
+    const bool operator()(const pair<int,string>& a, const pair<int,string>& b){
+        // Sort on same freq., but lexicographically on string.
+        if(a.first==b.first)
+            return a.second>b.second;
+        // Sort on decreasing frequency
+        return a.first<b.first;
+    }
+};
+
+class Solution {
+public:
+    
+    
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        unordered_map<string,int> map;
+        
+        for(string s: words) map[s]++;
+        
+        priority_queue<pair<int,string>, vector<pair<int,string>>, compare> pq;
+        for(auto it :map) pq.push({it.second,it.first});
+        vector<string> ans;
+        for(int i=0;i<k;i++){
+            ans.push_back(pq.top().second);
+            pq.pop();
+        }
+        return ans;
+    }
+};
