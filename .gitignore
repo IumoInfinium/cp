@@ -1,0 +1,7 @@
+// Ignore VS-Code files/folder
+.vscode/
+
+// Ignore complied files
+.out
+.o
+.exe
