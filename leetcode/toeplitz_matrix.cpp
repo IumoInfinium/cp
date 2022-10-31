@@ -23,13 +23,14 @@ public:
         //             return false;
         // return true;
         
+        // --- runtime varies(25-45 ms)  memory(18.4 MB)
         deque<int> buffer;
         for(int j=0;j<n;j++) buffer.push_back(matrix[0][j]);
         for(int i=1;i<m;i++){
             vector<int> row = matrix[i];
             
             for(int j=1; j<n; j++){
-                if(buffer[j] != row[j]) return false;
+                if(buffer[j-1] != row[j]) return false;
             }
             buffer.pop_back();
             buffer.push_front(row[0]);
