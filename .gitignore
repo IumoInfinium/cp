@@ -4,4 +4,4 @@
 // Ignore complied files
 .out
 .o
-.exe
+*.exe
