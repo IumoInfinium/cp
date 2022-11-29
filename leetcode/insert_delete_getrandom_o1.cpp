@@ -1,25 +1,28 @@
-class RandomizedSet {
+ss RandomizedSet {
 public:
-    set<int> s;
-    int i=0;
-    set<int> :: iterator it=s.begin();
+    unordered_map<int,int> map;
+    vector<int> nums;
     RandomizedSet() {}
     
     bool insert(int val) {
-        if(s.count(val)) return false;
-        s.insert(val);
+        if(map.find(val) != map.end()) return false;
+        nums.emplace_back(val);
+        map[val] = nums.size()-1;
         return true;
     }
     
     bool remove(int val) {
-        if(!s.count(val)) return false;
-        s.erase(val);
+        if(map.find(val) == map.end()) return false;
+        int end= nums.back();
+        map[end]=map[val];
+        nums[map[val]]=end;
+        nums.pop_back();
+        map.erase(val);
         return true;
     }
     
     int getRandom() {
-        if(s.size()) return *it++;
-        return 0;
+        return nums[rand()%nums.size()];
     }
 };
 
