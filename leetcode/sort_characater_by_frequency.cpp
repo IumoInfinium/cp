@@ -22,23 +22,50 @@ public:
     //     return ans;
     // }
 
-    string frequencySort(string& s){
-        vector<pair<char,int>> freq(122,make_pair('a',0));
-        for(char& c : s){
-            freq[c-'0'] = {c,freq[c-'0'].second+1};
-            // cout << freq[c-'0'].second <<endl;
+    // string frequencySort(string& s){
+    //     vector<pair<char,int>> freq(122,make_pair('a',0));
+    //     for(char& c : s){
+    //         freq[c-'0'] = {c,freq[c-'0'].second+1};
+    //     }
+    //     string ans;
+    //     sort(begin(freq),end(freq),[&](const pair<char,int>& a, const pair<char,int>& b){
+    //         return a.second > b.second;
+    //     });
+    //     int x=0;
+    //     for(auto&p : freq){
+    //         x = p.second;
+    //         if(!x) return ans;
+    //         while(x--){
+    //             ans+=p.first;
+    //         }
+    //     }
+    //     return ans;
+    // }
+
+    struct comp{
+        constexpr bool operator()(pair<char,int> const& a, pair<char,int> const& b)
+        const noexcept{
+            return a.second < b.second;
         }
+    };
+    string frequencySort(string& s){
+        vector<int> freq(122,0);
         string ans;
-        sort(begin(freq),end(freq),[&](const pair<char,int>& a, const pair<char,int>& b){
-            return a.second > b.second;
-        });
         int x=0;
-        for(auto&p : freq){
-            x = p.second;
-            if(!x) return ans;
+        for(char & c : s){
+            freq[c - '0']++;
+        }
+        priority_queue<pair<char,int>,vector<pair<char,int>>, comp> q;
+        for(int i=0; i<122;i++){
+            if(!freq[i]) continue;
+            q.push({'0'+i,freq[i]});
+        }
+        while(!q.empty()){
+            x = q.top().second;
             while(x--){
-                ans+=p.first;
+                ans += q.top().first;
             }
+            q.pop();
         }
         return ans;
     }
