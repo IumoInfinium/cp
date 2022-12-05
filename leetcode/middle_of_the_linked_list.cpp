@@ -10,21 +10,30 @@
  */
 class Solution {
 public:
-    ListNode* middleNode(ListNode* head) {
-        ListNode *slow;
-        slow=head;
-        int n=0;
-        while(slow!=NULL){
-            n+=1;
-            slow=slow->next;
-        }
-        slow=head;
-        head= head->next;
+    // ListNode* middleNode(ListNode* head) {
+    //     ListNode *slow;
+    //     slow=head;
+    //     int n=0;
+    //     while(slow!=NULL){
+    //         n+=1;
+    //         slow=slow->next;
+    //     }
+    //     slow=head;
+    //     head= head->next;
+    //     while(head!=NULL && head->next!=NULL){
+    //         slow=slow->next;
+    //         head=(head->next)->next;
+    //     }
+    //     if(n&1) return slow;
+    //     else return slow->next;
+    // }
+    
+    ListNode* middleNode(ListNode* head){
+        ListNode *slow=head;
         while(head!=NULL && head->next!=NULL){
             slow=slow->next;
-            head=(head->next)->next;
+            head=head->next->next;
         }
-        if(n&1) return slow;
-        else return slow->next;
+        return slow;
     }
 };
