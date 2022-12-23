@@ -38,18 +38,38 @@ public:
     // }
 
     // loop removal
-    int maxProfit(vector<int>& prices){
-        int n = prices.size();
-        vector<vector<int>> dp(n+2, vector<int>( 2, 0));
+    // int maxProfit(vector<int>& prices){
+    //     int n = prices.size();
+    //     vector<vector<int>> dp(n+2, vector<int>( 2, 0));
 
-        for(int idx = n-1; idx >= 0 ;idx--){
+    //     for(int idx = n-1; idx >= 0 ;idx--){
+    //         // buying
+    //         dp[idx][1] = max( -prices[idx] + dp[idx+1][0],
+    //                 0 + dp[idx+1][1]);
+    //         // selling
+    //         dp[idx][0] = max(prices[idx] + dp[idx+2][1],
+    //             0 + dp[idx+1][0]);
+    //     }
+    //     return dp[0][1];
+    // }
+
+    // dividing the dp in 3 different parts
+    int maxProfit(vector<int>& prices){
+        vector<int> front2(2,0);
+        vector<int> front1(2,0);
+        vector<int> curr(2,0);
+
+        for(int idx = prices.size()-1; idx >= 0 ;idx--){
             // buying
-            dp[idx][1] = max( -prices[idx] + dp[idx+1][0],
-                    0 + dp[idx+1][1]);
+            curr[1] = max( -prices[idx] + front1[0],
+                    0 + front1[1]);
             // selling
-            dp[idx][0] = max(prices[idx] + dp[idx+2][1],
-                0 + dp[idx+1][0]);
+            curr[0] = max(prices[idx] + front2[1],
+                0 + front1[0]);
+
+            front2= front1;
+            front1=curr;
         }
-        return dp[0][1];
+        return curr[1];
     }
 };
