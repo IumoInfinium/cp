@@ -1,6 +1,8 @@
 class Solution {
 public:
     int maxSubarraySumCircular(vector<int>& nums) {
+	// find max/min using kadane's algo and get the answer in O(n)
+	// brute force is O(n^2)
         int n = nums.size();
         if(!n) return 0;
 
