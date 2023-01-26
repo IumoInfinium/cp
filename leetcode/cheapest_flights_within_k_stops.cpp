@@ -3,6 +3,10 @@
 class Solution {
 public:
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+	/*
+        Idea - Using modified dijkstra with limit of moving only k steps
+        and storing the distance of every node in an array, for not moving ahead that distance again.
+        */
         vector<vector<pair<int,int>>> adj(n);
         int ans = INT_MAX;
 
