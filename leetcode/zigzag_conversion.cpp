@@ -1,32 +1,61 @@
-#define CHECK_STATE if(i==s.length()) break;
-
+//# define CHECK_STATE if(i==s.length()) break;
+// class Solution {
+// public:
+//     string convert(string s, int numRows) {
+//         string arr[numRows];
+//         int n = s.length();
+//         int i=0,j;
+//         while(i < n){
+//             for(int j=0; j<numRows; j++){
+//                 arr[j] += s[i];
+//                 i++;
+//                 if(i == n) break;
+//             }
+//             if(i==n) break;
+//             for(int j=(numRows - 2); j>0; j--){
+//                 arr[j] += s[i];
+//                 i++;
+//                 if(i == n) break;
+//             }
+//         }
+//         string ans=s;
+//         int k=0;
+//         for(int i=0; i<numRows; i++){
+//             for(int j=0; j<arr[i].length(); j++){
+//                 ans[k] = arr[i][j];
+//                 k++;
+//             }
+//         }
+//         return ans;
+//}
+//};
 class Solution {
 public:
     string convert(string s, int numRows) {
-        string mystr[numRows];
-        int i=0;
-        int j;
-        while(i<s.length()){
-            for(j=0;j<numRows;j++){
-                mystr[j]+=s[i];
+        string arr[numRows];
+        int n = s.length();
+        int i=0,j;
+        while(i < n){
+            for(int j=0; j<numRows; j++){
+                arr[j] += s[i];
                 i++;
-                CHECK_STATE
+                if(i == n) break;
             }
-            CHECK_STATE
-            for(int j=(numRows-2);j>0;j--){
-                mystr[j]+=s[i];
+            if(i==n) break;
+            for(int j=(numRows - 2); j>0; j--){
+                arr[j] += s[i];
                 i++;
-                CHECK_STATE
+                if(i == n) break;
             }
         }
-        string str=s;
+        string ans=s;
         int k=0;
-        for(int i=0;i<numRows;i++){
-            for(int j=0;j<mystr[i].length();j++){
-                str[k]=mystr[i][j];
+        for(int i=0; i<numRows; i++){
+            for(int j=0; j<arr[i].length(); j++){
+                ans[k] = arr[i][j];
                 k++;
             }
         }
-        return str;
+        return ans;
     }
 };
