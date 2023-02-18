@@ -20,9 +20,9 @@ public:
     void invert(TreeNode* node){
         if(!node) return;
         TreeNode* left = node->left;
-        TreeNode* right = node->right;
-
-        node->left = right;
+        // TreeNode* right = node->right;
+        
+        node->left = node->right;
         node->right = left;
         invert(node->left);
         invert(node->right);
