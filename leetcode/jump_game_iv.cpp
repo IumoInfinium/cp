@@ -21,7 +21,8 @@ public:
                 q.pop();
                 if(curr == n-1) return steps;
 
-                vector<int> options = item_map[arr[curr]];
+                // vector<int> options = item_map[arr[curr]];
+		vector<int> & options = item_map[arr[curr]];
                 options.push_back(curr-1);
                 options.push_back(curr+1);
 
@@ -31,7 +32,8 @@ public:
                         q.push(k);
                     }
                 }
-                item_map[arr[curr]].clear();
+                // item_map[arr[curr]].clear();
+		options.clear();	
             }
             steps++;
         }
