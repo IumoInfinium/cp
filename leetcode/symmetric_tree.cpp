@@ -11,17 +11,14 @@
  */
 class Solution {
 public:
-    bool isSymmetric(TreeNode* root) {
+    bool isSymmetric(TreeNode* root){
         if(!root) return true;
-        return helper(root->left,root->right);
+        return isMirror(root->left, root->right);
     }
-
-    bool helper(TreeNode* left, TreeNode* right){
+    bool isMirror(TreeNode* left, TreeNode* right){
         if(!left && !right) return true;
-        if(left && !right || !left && right) return false;
-        if(left->val == right->val){
-            return helper(left->left,right->right) && helper(left->left, right->right);
-        }
-        else return false;
+        if(!left || !right) return false;
+        if(left->val != right->val) return false;
+        return isMirror(left->left, right->right) && isMirror(left->right, right->left);
     }
 };
