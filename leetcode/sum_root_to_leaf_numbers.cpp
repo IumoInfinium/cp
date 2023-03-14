@@ -9,34 +9,60 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
-public:
-    int sumNumbers(TreeNode* root) {
-        vector<string> values;
-        dfs(root,"",values);
-        return add(values);
-    }
-    void dfs(TreeNode* node,string curr, vector<string>& values){
-        if(!node) return;
-        if(!node->left && !node->right){
-            values.emplace_back(curr+ to_string(node->val));
-            return;
-        }
-        dfs(node->left,curr + to_string(node->val), values);
-        dfs(node->right,curr + to_string(node->val), values);
-        return;
+// class Solution1 {
+// public:
+//     int sumNumbers(TreeNode* root) {
+//         vector<string> values;
+//         dfs(root,"",values);
+//         return add(values);
+//     }
+//     void dfs(TreeNode* node,string curr, vector<string>& values){
+//         if(!node) return;
+//         if(!node->left && !node->right){
+//             values.emplace_back(curr+ to_string(node->val));
+//             return;
+//         }
+//         dfs(node->left,curr + to_string(node->val), values);
+//         dfs(node->right,curr + to_string(node->val), values);
+//         return;
+//     }
+
+//     int add(vector<string>& values){
+//         int ans = 0;
+//         for(string s : values){
+//             int num=0;
+//             int n = s.size();
+//             for(int i=0; i<n;i++){
+//                 num += (s[n-i-1]-'0') * pow(10,i);
+//             }
+//             ans += num;
+//         }
+//         return ans;
+//     }
+// };
+
+class Solution2{
+public :
+    int sumNumbers(TreeNode* root){
+        int ans = 0;
+        dfs(root,"", ans);
+        return ans;
     }
 
-    int add(vector<string>& values){
-        int ans = 0;
-        for(string s : values){
-            int num=0;
-            int n = s.size();
-            for(int i=0; i<n;i++){
-                num += (s[n-i-1]-'0') * pow(10,i);
-            }
-            ans += num;
+    void dfs(TreeNode* node, string curr, int& ans){
+        if(!node) return;
+        if(!node->left && !node->right){
+            ans += giveInt(curr + to_string(node->val));
+            return;
         }
-        return ans;
+        dfs(node->left, curr + to_string(node->val), ans);
+        dfs(node->right, curr + to_string(node->val), ans);
+        return;
+    }
+    int giveInt(string s){
+        int num=0;
+        int n = s.size();
+        for(int i=0; i<n;i++) num += (s[n-i-1]-'0') * pow(10,i);
+        return num;
     }
 };
