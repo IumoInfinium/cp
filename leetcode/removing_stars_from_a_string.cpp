@@ -21,23 +21,32 @@ public:
     //     return ans;
     // }
     
+    // string removeStars(string s){
+    //     int n = s.size();
+    //     stack<char> st;
+    //     int i=0;
+    //     while(i<n){
+    //         if(s[i] != '*') st.push(s[i++]);
+    //         else{
+    //             st.pop();
+    //             i++;
+    //         }
+    //     }
+    //     string ans="";
+    //     while(!st.empty()){
+    //         ans.push_back(st.top());
+    //         st.pop();
+    //     }
+    //     reverse(begin(ans),end(ans));
+    //     return ans;
+    // }
+
     string removeStars(string s){
-        int n = s.size();
-        stack<char> st;
-        int i=0;
-        while(i<n){
-            if(s[i] != '*') st.push(s[i++]);
-            else{
-                st.pop();
-                i++;
-            }
+        string ans = "";
+        for(char c: s){
+            if(c != '*') ans+=c;
+            else ans.pop_back();
         }
-        string ans="";
-        while(!st.empty()){
-            ans.push_back(st.top());
-            st.pop();
-        }
-        reverse(begin(ans),end(ans));
         return ans;
     }
 };
