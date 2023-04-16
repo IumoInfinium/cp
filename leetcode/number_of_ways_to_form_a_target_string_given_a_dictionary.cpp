@@ -26,3 +26,4 @@ public:
         return memo[i][j] = (take + not_take)% MOD;
     }
 };
+
