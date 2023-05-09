@@ -26,3 +26,21 @@ public:
         return ans;
     }
 };
+
+class Solution1 {
+public:
+    int maxSum(TreeNode* node, int& ans){
+        if(!node) return 0;
+
+        int l = max(0,maxSum(node->left, ans));
+        int r = max(0,maxSum(node->right,ans));
+        node->left = node->right = NULL;
+        ans = max(ans, l + r + node->val);
+        return node->val + max(l,r);
+    }
+    int maxPathSum(TreeNode* root) {
+        int ans = INT_MIN;  // minimum possible node value
+        maxSum(root, ans);
+        return ans;
+    }
+};
