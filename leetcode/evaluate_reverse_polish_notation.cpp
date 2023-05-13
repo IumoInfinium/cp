@@ -1,30 +1,30 @@
 class Solution {
 public:
+    int a,b;
+
+    void getValues(stack<int>& st){
+        a = st.top(); st.pop();
+        b = st.top(); st.pop();
+    }
+
     int evalRPN(vector<string>& tokens) {
-        stack<long> st;
-        long x,y;
-        for(int i=0;i<tokens.size(); i++){
-            if(tokens[i] == "+"){
-                x = st.top(); st.pop();
-                y = st.top(); st.pop();
-                st.push(x+y);
+        stack<int> st;
+        for(string& s : tokens){
+            if(s  == "+"){
+                getValues(st); st.push(a+b);
             }
-            else if(tokens[i] == "-"){
-                x = st.top(); st.pop();
-                y = st.top(); st.pop();
-                st.push(y-x);
+            else if(s == "-"){
+                getValues(st); st.push(b-a);
             }
-            else if(tokens[i] == "*"){
-                x = st.top(); st.pop();
-                y = st.top(); st.pop();
-                st.push(x*y);
+            else if(s == "*"){
+                getValues(st); st.push(a*b);
             }
-            else if(tokens[i] == "/"){
-                x = st.top(); st.pop();
-                y = st.top(); st.pop();
-                st.push(y/x);
+            else if(s == "/"){
+                getValues(st); st.push(b/a);
             }
-            else st.push(stoi(tokens[i]));
+            else{
+                st.push(stoi(s));
+            }
         }
         return st.top();
     }
